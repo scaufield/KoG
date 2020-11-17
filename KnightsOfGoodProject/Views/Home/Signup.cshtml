@@ -1,0 +1,48 @@
+﻿@model KnightsOfGoodProject.Models.SignUpUserModel
+<section class="sign-in sec_pad">
+    <div class="signin-container">
+        <div class="signin-content">
+            <div class="signin-image">
+                <figure><img src="/images/signup-image.jpg" alt="sing up image"></figure>
+            </div>
+
+            <div class="signin-form">
+                <h2 class="form-title">Регистрация</h2>
+                <form class="register-form" id="login-form" asp-action="Signup">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label class="label-sign" for="your_name" asp-for="FirstName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input asp-for="FirstName" class="form-control input-sign" placeholder="Введите имя" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="label-sign" for="your_name" asp-for="LastName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input asp-for="LastName" class="form-control input-sign" placeholder="Введите фамилию" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-sign" for="your_name" asp-for="Email"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input asp-for="Email" class="form-control input-sign" placeholder="Введите e-mail" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-sign" for="your_pass" asp-for="Password"><i class="zmdi zmdi-lock"></i></label>
+                        <input asp-for="Password" class="form-control input-sign" placeholder="Введите пароль" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="label-sign" for="your_pass" asp-for="ConfirmPassword"><i class="zmdi zmdi-lock"></i></label>
+                        <input asp-for="ConfirmPassword" class="form-control input-sign" placeholder="Повторите пароль" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group form-button">
+                        <input type="submit" name="signin" id="signin" class="form-submit input-sign" value="Создать" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" />
+
+                    </div>
+                </form>
+        </div>
+        </div>
+    </div>
+</section>

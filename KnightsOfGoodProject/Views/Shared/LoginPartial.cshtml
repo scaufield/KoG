@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using KnightsOfGoodProject.Models 
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
+        <ul class="navbar-nav ml-auto menu">
+            <li class="nav-item nav-item-user">
+                <a class="nav-link" asp-area="" asp-controller="Friends" asp-action="Friends">Друзья</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Im">Личный кабинет</a>
+            </li>
+            
+            <li class="nav-item dropdown submenu active">
+                <a class="nav-link dropdown-toggle" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" role="button" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">
+                    Привет, @UserManager.GetUserName(User)!
+                </a>
+                <i class="fas fa-angle-down mobile_dropdown_icon"></i>
+                <ul class="dropdown-menu">
+                    <li class="nav-item ">
+                        <a  asp-area="" asp-controller="Account" asp-action="EditUser" class="nav-link dropdown  font-weight-bold ">Редактировать профиль</a>
+                    </li>
+                    <li class="nav-item">
+                        <a  class="nav-link dropdown font-weight-bold" asp-action="Logout" asp-controller="Account">Выйти</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+</form>
+
+
+
+}
+else
+{
+    <li class="nav-item"><a class="nav-link " asp-area="" asp-controller="Home" asp-action="Signup">Регистрация</a></li>
+    <li class="nav-item signin-button"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="Login">Войти</a></li>
+}
+

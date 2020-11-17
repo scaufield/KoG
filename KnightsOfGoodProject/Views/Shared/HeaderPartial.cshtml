@@ -1,0 +1,48 @@
+<header>
+
+    @*<div class="header_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 col-sm-5">
+                    <div class="header_social_icon">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-odnoklassniki"></i></a>                      
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-viber"></i></a>
+
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-7 text-right">
+                    <p>По всем вопросам обращаться: <span>  khnightsofgood@ru </span></p>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+    <nav class="navbar navbar-expand-lg" id="header">
+        <div class="container">
+            <a class="navbar-brand" href="#">Рыцари Добра</a>
+            <div class="navbar-collapse collapse">
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="menu_toggle"> </span>
+                </button>
+                <ul class="navbar-nav ml-auto menu">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Services" asp-action="Events">События</a>
+                    </li>
+ 
+                    <partial name="LoginPartial" />
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+</header>
