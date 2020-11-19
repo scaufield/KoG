@@ -21,6 +21,7 @@ using Microsoft.Extensions.Hosting;
 using KnightsOfGoodProject.Data.Repositories.Abstract;
 
 using KnightsOfGoodProject.Models;
+using KnightsOfGoodProject.Repositories.Abstract;
 
 namespace KnightsOfGoodProject
 {
@@ -36,8 +37,9 @@ namespace KnightsOfGoodProject
             services.AddTransient<DataManager>();
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<IHomeRepository, HomeRepository>();
-
-
+            services.AddTransient<ITextFieldsRepository, TextFieldsRepository>();
+            services.AddTransient<IServiceItemsRepository, ServiceItemsRepository>();
+            services.AddScoped<IUserService, UserService>();
 
 
             services.AddDbContext<ApplicationDbContext>(options =>

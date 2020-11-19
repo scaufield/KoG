@@ -1,0 +1,30 @@
+﻿@model IQueryable<ServiceItem>
+
+@if (Model?.Any() == true)
+{
+    int count = 0;
+    @foreach (ServiceItem entity in Model)
+    {
+       
+        @if (count < 3){
+        <div class="f_latest_info">
+            <div class="media f_latest_item">
+                <div class="img_hover">
+                    <a class="image-link" asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity.Id">
+                        <img src="~/images/@entity.TitleImagePath" alt="" class="left" />
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h5>
+                        @entity.Title
+                    </h5>
+                    <a href="#" class="l_date">@Html.DisplayFor(modelItem => entity.DateTime)</a>
+                </div>
+            </div>
+        </div>
+            count++;
+        }
+    }
+        }
+
+

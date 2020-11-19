@@ -30,6 +30,7 @@
     <None Include="Views\Account\Login.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Signup.cshtml" />
+    <None Include="Views\Shared\Components\Sidebar\Default.cshtml" />
     <None Include="Views\Shared\CssPartial.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\FooterPartial.cshtml" />
@@ -40,6 +41,13 @@
     <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
     <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="wwwroot\images\banner1.svg" />
+    <None Include="wwwroot\images\banner2.svg" />
+    <None Include="wwwroot\images\banner3.svg" />
+    <None Include="wwwroot\images\odnoklassniki.svg" />
+    <None Include="wwwroot\images\shield.svg" />
+    <None Include="wwwroot\images\vk.svg" />
+    <None Include="wwwroot\images\whatsapp.svg" />
     <None Include="wwwroot\js\bundle.js" />
     <None Include="wwwroot\js\ckeditor\adapters\jquery.js" />
     <None Include="wwwroot\js\ckeditor\build-config.js" />
