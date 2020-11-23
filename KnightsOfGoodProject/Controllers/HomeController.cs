@@ -44,7 +44,12 @@ namespace KnightsOfGoodProject.Controllers
 
         public async Task<IActionResult> Im()
         {         
-            return View();
+            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
+
+            string UserId = user.Id;
+            ViewBag.Event = _dataManager.HomeRepository.GetUserEvents(UserId);
+
+            return View(user);
         }
 
 
