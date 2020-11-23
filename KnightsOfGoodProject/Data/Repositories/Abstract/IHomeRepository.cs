@@ -10,6 +10,6 @@ namespace KnightsOfGoodProject.Data.Repositories.Abstract
 {
     public interface IHomeRepository
     {
-   
+        IQueryable<ServiceItem> GetUserEvents(string UserID);
     }
 }

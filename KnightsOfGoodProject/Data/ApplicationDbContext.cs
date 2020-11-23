@@ -14,8 +14,9 @@ namespace KnightsOfGoodProject.Data
         //Проецируем наши классы на базу данных
    
          public DbSet<TextField> TextFields { get; set; }
-        public DbSet<ServiceItem> ServiceItems { get; set; }
-       public DbSet<ApplicationUser> ApplicationUser { get; set; }
+         public DbSet<ServiceItem> ServiceItems { get; set; }
+         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+         public DbSet<EventsAndUserModel> EventsAndUser { get; set; }
 
       
         //Заполняем БД значениями по умолчанию
@@ -49,7 +50,6 @@ namespace KnightsOfGoodProject.Data
                 UserId = "3b62472e-4f66-49fa-a20f-e7685b9565d8"
             });
 
-
             //Создаем три объекта в бд, - это наши текстовые поля
             modelBuilder.Entity<TextField>().HasData(new TextField
             {
@@ -69,6 +69,8 @@ namespace KnightsOfGoodProject.Data
                 CodeWord = "PageContacts",
                 Title = "Контакты"
             });
+
+
 
 
         }

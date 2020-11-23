@@ -23,7 +23,11 @@ namespace KnightsOfGoodProject.Data.Repositories
         {
             _userManager = userManager;
             _context = context;
+        }
 
+        public IQueryable<ServiceItem> GetUserEvents(string UserID)
+        {
+            return _context.ServiceItems.Where(x => x.Users.Any(z => z.UserId == UserID));
         }
 
 

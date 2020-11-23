@@ -7,7 +7,8 @@ namespace KnightsOfGoodProject.Models
 {
     public class ServiceItem : EntityBase
     {
-      
+        public List<EventsAndUserModel> Users { get; set; }
+        public int UserCounter { get; set; }
 
         [Required(ErrorMessage = "Заполните название мероприятия")]
         [Display(Name = "Название мероприятия")]
@@ -28,6 +29,11 @@ namespace KnightsOfGoodProject.Models
 
         [Display(Name = "Полное описание мероприятия")]
         public override string Text { get; set; }
+
+        public ServiceItem()
+        {
+            Users = new List<EventsAndUserModel>();
+        }
 
 
     }
