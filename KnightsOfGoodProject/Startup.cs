@@ -40,6 +40,9 @@ namespace KnightsOfGoodProject
             services.AddTransient<ITextFieldsRepository, TextFieldsRepository>();
             services.AddTransient<IServiceItemsRepository, ServiceItemsRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IFriendsRepository, FriendsRepository>();
+
+
 
 
             services.AddDbContext<ApplicationDbContext>(options =>
