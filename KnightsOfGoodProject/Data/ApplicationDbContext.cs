@@ -70,7 +70,21 @@ namespace KnightsOfGoodProject.Data
                 Title = "Контакты"
             });
 
+            modelBuilder.Entity<EventsAndUserModel>()
+                .HasKey(t => new { t.UserId, t.EventId });
 
+
+
+            modelBuilder.Entity<EventsAndUserModel>()
+                .HasOne(sc => sc.User)
+                .WithMany(c => c.UserEvents)
+                .HasForeignKey(sc => sc.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<EventsAndUserModel>()
+                .HasOne(sc => sc.Event)
+                .WithMany(s => s.Users)
+                .HasForeignKey(sc => sc.EventId);
 
 
         }
