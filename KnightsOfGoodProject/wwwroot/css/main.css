@@ -4198,6 +4198,25 @@ input[type="datetime"] {
     border-radius: 24px;
 }
 
+input[type="date"] {
+    margin: 0;
+    padding: 9px 65px;
+    border: 1px solid #eeeeee;
+    width: 100%;
+    outline: none;
+    color: #999999;
+    font-size: 17px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    background: #fff;
+    transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    border-radius: 24px;
+}
+
+
 .search-widget .row button {
     background: transparent;
     border: none;

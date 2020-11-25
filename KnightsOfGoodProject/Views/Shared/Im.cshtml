@@ -1,0 +1,203 @@
+﻿@model ApplicationUser
+@{ ViewData["Title"] = "Мой профиль";
+}
+<section class="sec_pad">
+    <div class="container">
+        <div class="main-body">
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3 wow fadeInLeft">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="~/images/@Model.UserImagePath" class="rounded-circle" width="200">
+                                <div class="mt-3">
+                                    <h3>@Model.FirstName @Model.LastName</h3>
+                                    <p class="text-secondary mb-1">Волонтёр</p>
+
+                                    <button type="button" class="btn btn-link" data-toggle="modal" data-target=".bd-example-modal-xl">
+                                        Мои актуальные мероприятия
+                                    </button>
+
+
+                                    <div class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog"
+                                         aria-labelledby="myHugeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-xl">
+                                            <div class="modal-content">
+
+                                                <div class="row">
+
+
+                                                    @foreach (ServiceItem entity2 in ViewBag.Event)
+                                                    {
+                                                        DateTime NowTime = DateTime.Now;
+
+                                                        @if (@entity2.DateTime > NowTime)
+                                                        {
+                                                            <div class="col-lg-6 col-md-6">
+                                                                <div class="card mb-5">
+                                                                    <a asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity2.Id">
+                                                                        <img class="card-img-profile" src="~/images/@entity2.TitleImagePath" alt="Card image cap">
+                                                                    </a>
+                                                                    <div class="card-body  card-event-pd">
+                                                                        <h4 class="card-title">@entity2.Title</h4>
+                                                                        <p class="post-meta">@Html.DisplayFor(modelItem => @entity2.DateTime)</p>
+                                                                        <p class="card-text">
+                                                                            @entity2.Subtitle
+                                                                        </p>
+                                                                        <a asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity2.Id" class="card-link">К мероприятию</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+
+                                                        }
+                                                    }
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-sm mt-3">
+                        <div class="card-body">
+
+                            <div class="row d-flex justify-content-around align-items-center pl-5 pr-5">
+
+                                <div>
+                                    <img class="mr-2 icon-inline" src="~/images/vk.svg" width="24" height="24" alt="" />
+                                </div>
+                                <div>
+                                    <a class="mb-0"><svg xmlns="<http://www.w3.org/2000/svg>" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                                </div>
+
+
+                                <div>
+                                    <img class="mr-2 icon-inline" src="~/images/odnoklassniki.svg" width="24" height="24" alt="" />
+                                </div>
+                                <div>
+                                    <img class="mr-2 icon-inline" src="~/images/whatsapp.svg" width="24" height="24" alt="" />
+                                </div>
+
+
+                                <div>
+
+                                    <a class="mb-0"><svg xmlns="<http://www.w3.org/2000/svg>" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+
+                                </div>
+
+
+
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.Email
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    (239) 816-9029
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">BDay</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Html.DisplayFor(modelItem => Model.DateOfBirth)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 wow fadeInRight">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <h4 class="mb-0">Bio</h4>
+                                </div>
+                                <div class="col-sm-10 text-secondary">
+                                    @Model.Bio
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card shadow-sm mt-3">
+                        <h5 class="mt-3 text-center">Участвую в мероприятиях</h5>
+                        <ul class="list-inline text-center">
+
+
+                            @foreach (ServiceItem entity2 in ViewBag.Event)
+                            {
+                                DateTime NowTime = DateTime.Now;
+
+
+                                @if (@entity2.DateTime > NowTime)
+                                {
+                                    <a class="list-inline-item" asp-controller="Services" asp-action="Events" asp-route-id="@entity2.Id">@entity2.Title</a>
+
+
+
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                    <div class="card mt-3 border-white">
+
+                        <h5 class="mt-3 text-center">Архив моих мероприятий</h5>
+
+                        <div class="row">
+                            <div class="col-center">
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                                    <div class="carousel-inner justify-content-center">
+                                        <div class="carousel-item">
+                                            <div class="row ">
+                                                @foreach (ServiceItem entity in ViewBag.Event)
+                                                {
+
+                                                    <div class="col-sm-4">
+
+                                                        <div class="img-box">
+                                                            <a class="img-box-a" asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity.Id">
+                                                                <img class="img-responsive" src="~/images/@entity.TitleImagePath" />
+                                                            </a>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

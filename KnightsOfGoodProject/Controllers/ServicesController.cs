@@ -40,8 +40,8 @@ namespace KnightsOfGoodProject.Controllers
         [HttpPost]
         public IActionResult Events(DateTime startdate, DateTime enddate)
         {
-
-            return View(_context.ServiceItems.Where(z => (z.DateTime <= startdate) && (z.DateTime <= enddate)));
+            var model = _context.ServiceItems.Where(z => (z.DateTime >= startdate) && (z.DateTime <= enddate));
+            return View(model);
         }
 
     }
