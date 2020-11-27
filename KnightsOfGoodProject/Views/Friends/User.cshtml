@@ -4,169 +4,169 @@
 }
 <section class="sec_pad">
     <div class="container">
-        <a class="img img_friend" asp-area="" asp-controller="Friends" asp-action="All" asp-route-id="@Model.Id">Назад к друзьям</a>
-            <div class="main-body">
+        <a class="img img_friend" asp-area="" asp-controller="Friends" asp-action="All" asp-route-id="@Model.Id"><i class="fas fa-long-arrow-alt-left"></i>Назад к друзьям</a>
+        <div class="main-body">
 
-                <div class="row gutters-sm">
-                    <div class="col-md-4 mb-3">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <div class="d-flex flex-column align-items-center text-center">
-                                    <img src="~/images/@Model.UserImagePath" class="rounded-circle" width="200">
-                                    <div class="mt-3">
-                                        <h3>@Model.FirstName @Model.LastName</h3>
-                                        <p class="text-secondary mb-1">Волонтёр</p>
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="~/images/@Model.UserImagePath" class="rounded-circle" width="200">
+                                <div class="mt-3">
+                                    <h3>@Model.FirstName @Model.LastName</h3>
+                                    <p class="text-secondary mb-1">Волонтёр</p>
 
-                                        <div class="dropdown">
+                                    <div class="dropdown">
 
-                                            @if (@IsFriend == false)
-                                            {
-                                                <form method="post">
-                                                    <input type="submit" value="Добавить в друзья" class="my-button maiden-3" />
-                                                </form>
+                                        @if (@IsFriend == false)
+                                        {
+                                            <form method="post">
+                                                <input type="submit" value="Добавить в друзья" class="my-button maiden-3" />
+                                            </form>
 
-                                                @*<a class="stylistics_knopkam maiden-3" asp-area="" asp-controller="Friends" asp-action="GetFriendPost">В Друзья</a>*@
-                                            }
-                                            else
-                                            {
-                                                <button class="my-button  maiden-3 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">В друзьях</button>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" asp-area="" asp-controller="Friends" asp-action="DeleteFriend">Удалить из друзей</a>
-                                                </div>
+                                            @*<a class="stylistics_knopkam maiden-3" asp-area="" asp-controller="Friends" asp-action="GetFriendPost">В Друзья</a>*@
+                                        }
+                                        else
+                                        {
+                                            <button class="my-button  maiden-3 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">В друзьях</button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" asp-area="" asp-controller="Friends" asp-action="DeleteFriend">Удалить из друзей</a>
+                                            </div>
 
-                                            }
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card shadow-sm mt-3">
-                            <div class="card-body">
-
-                                <div class="row d-flex justify-content-around align-items-center pl-5 pr-5">
-
-                                    <div>
-                                        <img class="mr-2 icon-inline" src="~/images/vk.svg" width="24" height="24" alt="" />
-                                    </div>
-                                    <div>
-                                        <a class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
-                                    </div>
-
-                                    <div>
-                                        <img class="mr-2 icon-inline" src="~/images/odnoklassniki.svg" width="24" height="24" alt="" />
-                                    </div>
-                                    <div>
-                                        <img class="mr-2 icon-inline" src="~/images/whatsapp.svg" width="24" height="24" alt="" />
-                                    </div>
-
-                                    <div>
-
-                                        <a class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                                        }
 
                                     </div>
 
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Email</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        @Model.Email
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">Phone</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        (239) 816-9029
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h6 class="mb-0">BDay</h6>
-                                    </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        @Model.DateOfBirth
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-8">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-sm-2">
-                                        <h4 class="mb-0">Bio</h4>
-                                    </div>
-                                    <div class="col-sm-10 text-secondary">
-                                        @Model.Bio
-                                    </div>
+                    <div class="card shadow-sm mt-3">
+                        <div class="card-body">
+
+                            <div class="row d-flex justify-content-around align-items-center pl-5 pr-5">
+
+                                <div>
+                                    <img class="mr-2 icon-inline" src="~/images/vk.svg" width="24" height="24" alt="" />
+                                </div>
+                                <div>
+                                    <a class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                                </div>
+
+                                <div>
+                                    <img class="mr-2 icon-inline" src="~/images/odnoklassniki.svg" width="24" height="24" alt="" />
+                                </div>
+                                <div>
+                                    <img class="mr-2 icon-inline" src="~/images/whatsapp.svg" width="24" height="24" alt="" />
+                                </div>
+
+                                <div>
+
+                                    <a class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+
                                 </div>
 
                             </div>
-                        </div>
-                        <div class="card shadow-sm mt-3">
-                            <h5 class="mt-3 text-center">Участвую в мероприятиях</h5>
-                            <ul class="list-inline text-center">
-
-                                @foreach (ServiceItem entity2 in ViewBag.Event)
-                                {
-                                    DateTime NowTime = DateTime.Now;
-
-                                    @if (@entity2.DateTime > NowTime)
-                                    {
-                                        <li><a class="list-inline-item" asp-controller="Services" asp-action="Events" asp-route-id="@entity2.Id">@entity2.Title</a> </li>
-
-                                    }
-                                }
-
-                            </ul>
-                        </div>
-                        <div class="card mt-3 border-white">
-
-                            <h5 class="mt-3 text-center">Архив мероприятий</h5>
-
+                            <hr>
                             <div class="row">
-                                <div class="col-center">
-                                    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-                                        <div class="carousel-inner justify-content-center">
-                                            <div class="carousel-item">
-                                                <div class="row ">
-                                                    @foreach (ServiceItem entity in ViewBag.Event)
-                                                    {
-
-                                                        <div class="col-sm-4">
-
-                                                            <div class="img-box">
-                                                                <a class="img-box-a" asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity.Id">
-                                                                    <img class="img-responsive" src="~/images/@entity.TitleImagePath" />
-                                                                </a>
-                                                            </div>
-
-                                                        </div>
-
-                                                    }
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.Email
                                 </div>
                             </div>
-
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    (239) 816-9029
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">BDay</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.DateOfBirth
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="col-md-8">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <h4 class="mb-0">Bio</h4>
+                                </div>
+                                <div class="col-sm-10 text-secondary">
+                                    @Model.Bio
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="card shadow-sm mt-3">
+                        <h5 class="mt-3 text-center">Участвую в мероприятиях</h5>
+                        <ul class="list-inline text-center">
+
+                            @foreach (ServiceItem entity2 in ViewBag.Event)
+                            {
+                                DateTime NowTime = DateTime.Now;
+
+                                @if (@entity2.DateTime > NowTime)
+                                {
+                                    <li><a class="list-inline-item" asp-controller="Services" asp-action="Events" asp-route-id="@entity2.Id">@entity2.Title</a> </li>
+
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                    <div class="card mt-3 border-white">
+
+                        <h5 class="mt-3 text-center">Архив мероприятий</h5>
+
+                        <div class="row">
+                            <div class="col-center">
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
+                                    <div class="carousel-inner justify-content-center">
+                                        <div class="carousel-item">
+                                            <div class="row ">
+                                                @foreach (ServiceItem entity in ViewBag.Event)
+                                                {
+
+                                                    <div class="col-sm-4">
+
+                                                        <div class="img-box">
+                                                            <a class="img-box-a" asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity.Id">
+                                                                <img class="img-responsive" src="~/images/@entity.TitleImagePath" />
+                                                            </a>
+                                                        </div>
+
+                                                    </div>
+
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
+        </div>
     </div>
 </section>

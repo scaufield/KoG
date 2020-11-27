@@ -3,132 +3,123 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using KnightsOfGoodProject.Data;
 using KnightsOfGoodProject.Data.Repositories.Abstract;
 using KnightsOfGoodProject.Models;
-using KnightsOfGoodProject.Service;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 
-namespace KnightsOfGoodProject.Controllers
+namespace KnightsOfGoodProject.Data.Repositories
 {
-    public class FriendsController : Controller
+    public class FriendsRepository : IFriendsRepository
     {
-      
         private readonly ApplicationDbContext _context;
-        private readonly IUserService _userService;
-        private UserManager<ApplicationUser> _userManager;
-        private readonly DataManager _dataManager;
-
-        public FriendsController( DataManager dataManager,  IUserService userService, UserManager<ApplicationUser> usr, ApplicationDbContext context)
+        public FriendsRepository(ApplicationDbContext context)
         {
-          
             _context = context;
-            _userService = userService;
-            _userManager = usr;
-            _dataManager = dataManager;
-
         }
 
-        public async Task<IActionResult> Friends(String id)
+
+        public IQueryable<ApplicationUser> GetAllUsers()
         {
-            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            var UserID = user.Id;
-            string userId = _userService.GetUserId();   
-            if(id == UserID)
+            return _context.ApplicationUser;
+        }
+        public IQueryable<ApplicationUser> GetFriendsUsers(string userId)
+        {
+            return _context.Users.Where(x => x.UserFriends.Any(z => z.FriendId == userId));
+        }
+
+
+
+
+
+
+
+
+        public ApplicationUser GetUserById(String id)
+        {
+            return _context.ApplicationUser.FirstOrDefault(x => x.Id == id);
+        }
+
+
+
+
+        public async Task AddFriendAsync(ApplicationUser currentUser, ApplicationUser Friend)
+        {
+
+
+            var friendshipsCount = _context.Friends.Where(x =>
+               x.FriendId == Friend.Id && x.UserId == currentUser.Id
+               || (x.FriendId == currentUser.Id && x.UserId == Friend.Id)).Count();
+
+            if (friendshipsCount == 0)
             {
-                ViewBag.IsFriend = _dataManager.FriendsRepository.IsFriendById(userId, id);
-                ViewBag.Event = _dataManager.HomeRepository.GetUserEvents(id);
-                return View("Im", _dataManager.FriendsRepository.GetUserById(id));
-            }
-            else  if (id != default)
-            {
-                ViewBag.IsFriend = _dataManager.FriendsRepository.IsFriendById(userId, id);
-                ViewBag.Event = _dataManager.HomeRepository.GetUserEvents(id);
-                return View("User", _dataManager.FriendsRepository.GetUserById(id));
-            }
-
-            return View(_dataManager.FriendsRepository.GetAllUsers());
-        }
-
-        [HttpGet("Friends/Friends/{action}")]
-        public async Task<IActionResult> All(String id)
-        {
-            ApplicationUser user = await _userManager.GetUserAsync(HttpContext.User);
-            var UserID = user.Id;
-            return View(_dataManager.FriendsRepository.GetFriendsUsers(UserID));
-        }
-
-        [HttpPost("Friends/Friends/{id}")]
-        public async Task<IActionResult> GetFriendPost(string id)
-        {
-
-            ApplicationUser Friend = _context.Users.FirstOrDefault(x => x.Id == id);
-            await AddFriend(Friend);
-
-            ViewBag.Event = _dataManager.HomeRepository.GetUserEvents(id);
-            return View("User", _dataManager.FriendsRepository.GetUserById(id));
-        }
-
-        [HttpPost]
-        public async Task AddFriend(ApplicationUser Friend)
-        {
-            ApplicationUser currentUser = _context.Users.FirstOrDefault(x => x.UserName == User.Identity.Name);
-            var currentUserID = currentUser.Id;
-
-            await _dataManager.FriendsRepository.AddFriendAsync(currentUser, Friend);
-
-        }
-
-        [HttpGet("Friends/Friends/{id}/{action}")]
-        public IActionResult DeleteFriend(string id)
-        {
-            ApplicationUser currentUser = _context.Users.Include(x => x.UserFriends).ThenInclude(x => x.Friend).FirstOrDefault(x => x.UserName == User.Identity.Name);
-            if (currentUser.UserFriends.Count != 0)
-            {
-                var UserToBeDeleted = currentUser.UserFriends.First(x => x.FriendId == id);
-                if (UserToBeDeleted != null)
+                if (Friend != null && currentUser != null)
                 {
-                    _context.Friends.Remove(UserToBeDeleted);
+                    Friend.UserFriends.Add(new Friends { UserId = Friend.Id, FriendId = currentUser.Id });
+                    currentUser.UserFriends.Add(new Friends { UserId = currentUser.Id, FriendId = Friend.Id });
+                    _context.Update(currentUser);
                     _context.SaveChanges();
-                    var UserToBeDeleted2 = _context.Users.Include(x => x.UserFriends).ThenInclude(x => x.Friend).FirstOrDefault(x => x.Id == UserToBeDeleted.FriendId);
-                    var delete = UserToBeDeleted2.UserFriends.First(x => x.FriendId == currentUser.Id);
-                    _context.Friends.Remove(delete);
-                    _context.SaveChanges();
-                    ViewBag.IsFriend = _dataManager.FriendsRepository.IsFriendById(currentUser.Id, id);
-                    ViewBag.Event = _dataManager.HomeRepository.GetUserEvents(id);
-
-                    return View("DeleteFriend", _dataManager.FriendsRepository.GetUserById(id));
+                    // FriendAddUser(Friend);
                 }
-                return View();
+                else
+                {
+                    //обработать ошибку отсутствующего юзера					
+                }
             }
-            return View();
+            else
+            {
+                //обработать ошибку если юзер уже добавлен
+            }
         }
-
-        [HttpGet("Friends/Friends/{action}")]
-        public async Task<GetUserFriendsViewModel> GetFriends(string id)
+        public bool IsFriend(ApplicationUser currentUser, ApplicationUser Friend)
         {
-            var model = await _dataManager.FriendsRepository.GetFriendsAsync(id);
-            // ViewFriend(model);
-            return null;
-        }
+            var friendshipsCount = _context.Friends.Where(x =>
+              x.FriendId == Friend.Id && x.UserId == currentUser.Id
+              || (x.FriendId == currentUser.Id && x.UserId == Friend.Id)).Count();
 
-        [HttpGet("Friends/Friends/{action}")]
-        public Task GetFriendsBy(string id)
+            if (friendshipsCount == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+        public bool IsFriendById(string currentUserID, string FriendID)
         {
-            var model = _dataManager.FriendsRepository.GetFriendsByAsync(id);
-            ViewFriend(model);
-            return null;
-        }
+            var friendshipsCount = _context.Friends.Where(x =>
+              x.FriendId == FriendID && x.UserId == currentUserID
+              || (x.FriendId == currentUserID && x.UserId == FriendID)).Count();
 
-        public IActionResult ViewFriend(Task ApplicationUser)
+            if (friendshipsCount == 0)
+            {
+                return false;
+            }
+            return true;
+        }
+        public async Task<GetUserFriendsViewModel> GetFriendsAsync(string userId)
         {
-            return View("MyFriends", ApplicationUser);
+            var friendsList = await _context.Users.Where(x => x.UserFriends.Any(z => z.FriendId == userId)).ToListAsync();
+
+            var count = _context.Friends.Where(x => x.UserId == userId).Select(x => x.FriendId)
+                .Count();
+
+            var friends = new GetUserFriendsViewModel
+            {
+                friends = friendsList,
+                Count = count
+            };
+
+            return friends;
+        }
+        public Task GetFriendsByAsync(string userId)
+        {
+            var friendsList = _context.Users.Where(x => x.UserFriends.Any(z => z.FriendId == userId)).ToListAsync();
+
+            var count = _context.Friends.Where(x => x.UserId == userId).Select(x => x.FriendId)
+                .Count();
+
+            return friendsList;
+
 
         }
-
     }
-
 }

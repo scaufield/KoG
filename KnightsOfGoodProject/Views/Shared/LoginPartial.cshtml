@@ -9,7 +9,7 @@
     <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm" class="navbar-right">
         <ul class="navbar-nav ml-auto menu">
             <li class="nav-item nav-item-user">
-                <a class="nav-link" asp-area="" asp-controller="Friends" asp-action="Friends">Друзья</a>
+                <a class="nav-link" asp-area="" asp-controller="Friends" asp-action="ReturnToFriends">Друзья</a>
             </li>
             <li class="nav-item ">
                 <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Im">Личный кабинет</a>

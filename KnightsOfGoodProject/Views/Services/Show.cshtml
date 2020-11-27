@@ -6,136 +6,138 @@
 @inject UserManager<ApplicationUser> UserManager
     @{ViewData["Title"] = @Model.Title; }
 
-    <div class="body_wrapper">
-        <div id="preloader">
-            <div id="ctn-preloader" class="ctn-preloader">
-                <img src="../assets/img/loader.gif" alt="" />
+<div class="body_wrapper">
+    <div id="preloader">
+        <div id="ctn-preloader" class="ctn-preloader">
+            <img src="../assets/img/loader.gif" alt="" />
+        </div>
+    </div>
+
+    <!--breadcrumb_area-->
+    <section class="breadcrumb_area parallax_effect">
+        <div class="overlay_bg"></div>
+        <div class="container">
+            <div class="bread_content">
+
+                <h2>@Model.Title</h2>
             </div>
         </div>
+    </section>
+    <!--breadcrumb_area-->
+    <!--blog area-->
+    <a class="nav-link font-weight-bold text-black-50" asp-area="" asp-controller="Services" asp-action="ReturnEvents"><i class="fas fa-arrow-left"></i>Назад к мероприятиям</a>
 
-        <!--breadcrumb_area-->
-        <section class="breadcrumb_area parallax_effect">
-            <div class="overlay_bg"></div>
-            <div class="container">
-                <div class="bread_content">
+    <section class="blog_details_area sec_pad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 card">
+                    <div class="blog_details_content">
+                        <a href="#" class="card-img-top">
+                            <img class="event-image" src="~/images/@Model.TitleImagePath" alt="" />
+                        </a>
+                        <div class="card-body">
 
-                    <h2>@Model.Title</h2>
-                </div>
-            </div>
-        </section>
-        <!--breadcrumb_area-->
-        <!--blog area-->
-        <section class="blog_details_area sec_pad">
-            <div class="container">
-                <a href='javascript:history.go(-1)'>Назад к мероприятиям</a>
-                <div class="row">
-                    <div class="col-lg-8 card">
-                        <div class="blog_details_content">
-                            <a href="#" class="card-img-top">
-                                <img src="~/images/@Model.TitleImagePath" alt="" />
-                            </a>
-                            <div class="card-body">
+                            <div class="h_post_info">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="item">
+                                        <h5> Количество участников:</h5>
 
-                                <div class="h_post_info">
-                                    <div class="row d-flex justify-content-start">
-                                        <div class="item col-5">
-                                            <h5> Количество участников:</h5>
-
-                                            <h6 class="text-black-50">
-                                                @ViewBag.UsersCol
-                                                @if (ViewBag.IsPart == true)
-                                                {
-                                                    <span class="ml-2">(Вы участвуете!)</span>
+                                        <h6 class="text-black-50">
+                                            @ViewBag.UsersCol
+                                            @if (ViewBag.IsPart == true)
+                                            {
+                                                <span class="ml-2">(Вы участвуете!)</span>
 
 
-                                                }
-                                            </h6>
-                                        </div>
-                                        <div class="item  col-7">
-                                            <h5>
-                                                Дата мероприятия:
-                                            </h5>
-                                            <h6 class="text-black-50"> @Html.DisplayFor(modelItem => Model.DateTime) </h6>
-                                        </div>
+                                            }
+                                        </h6>
                                     </div>
-
-
+                                    <div class="item">
+                                        <h5>
+                                            Дата мероприятия:
+                                        </h5>
+                                        <h6 class="text-black-50"> @Html.DisplayFor(modelItem => Model.DateTime) </h6>
+                                    </div>
                                 </div>
 
-                                <h4 class="mt-3"> @Model.Subtitle</h4>
-                                <div class="mt-3">
-                                    @Html.Raw(Model.Text)
-                                </div>
-                                <hr>
 
-                                @if (SignInManager.IsSignedIn(User))
+                            </div>
+
+                            <h4 class="mt-3"> @Model.Subtitle</h4>
+                            <div class="mt-3">
+                                @Html.Raw(Model.Text)
+                            </div>
+                            <hr>
+
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+
+                                @if ((ViewBag.IsPart == false) && (@Model.DateTime > DateTime.Now))
                                 {
+                                    <form method="post" class="d-flex  justify-content-center">
+                                        <input type="submit" value="Участвовать!" class="my-button maiden-3" />
+                                    </form>
 
-                                    @if ((ViewBag.IsPart == false) && (@Model.DateTime > DateTime.Now))
-                                    {
-                                        <form method="post" class="d-flex  justify-content-center">
-                                            <input type="submit" value="Участвовать!" class="my-button maiden-3" />
-                                        </form>
-
-                                    }
-                                    else if (@Model.DateTime > DateTime.Now)
-                                    {
-                                        <form method="post" class="d-flex  justify-content-center">
-                                            <input type="submit" value="Я участвую!" class="my-button maiden-3 event-button-style" />
-                                        </form>
-
-
-                                    }
                                 }
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="blog_sidebar">
-                            <div class="sidebar_widget f_latest_widget">
-                                <h4 class="f-title">Другие мероприятия</h4>
+                                else if (@Model.DateTime > DateTime.Now)
+                                {
+                                    <form method="post" class="d-flex  justify-content-center">
+                                        <input type="submit" value="Я участвую!" class="my-button maiden-3 event-button-style" />
+                                    </form>
 
-                                @await Html.PartialAsync("SidebarPartial")
 
-                                <div class="sidebar_widget">
-                                    <h3 class="f-title">Участники мероприятия</h3>
-                                    <ul class="list-unstyled recent_post_gallery">
-                                        @foreach (ApplicationUser entity in ViewBag.Users)
-                                        {
-                                            <li>
-                                                @if (SignInManager.IsSignedIn(User))
-                                                {
-                                                    <a asp-area="" asp-controller="Friends" asp-action="Friends" asp-route-id="@entity.Id">
-                                                        <i class="fas fa-plus"></i>
-                                                        <img src="~/images/@entity.UserImagePath" alt="" />
-                                                        <div class="carousel-caption d-none d-md-block">
-                                                            <p>@entity.FirstName</p>
-                                                        </div>
-                                                    </a>
-
-                                                }
-                                                else
-                                                {
-                                                    <a href="#">
-                                                        <i class="fas fa-plus"></i>
-                                                        <img src="~/images/@entity.UserImagePath" alt="" />
-                                                        <div class="carousel-caption d-none d-md-block">
-                                                            <p>@entity.FirstName</p>
-                                                        </div>
-                                                    </a>
-                                                }
-
-                                            </li>
-                                        }
-                                    </ul>
-                                </div>
-
-                            </div>
-
+                                }
+                            }
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+                <div class="col-lg-4">
+                    <div class="blog_sidebar">
+                        <div class="sidebar_widget f_latest_widget">
+                            <h4 class="f-title">Другие мероприятия</h4>
 
-    </div>
+                            @await Html.PartialAsync("SidebarPartial")
+
+                            <div class="sidebar_widget">
+                                <h3 class="f-title">Участники мероприятия</h3>
+                                <ul class="list-unstyled recent_post_gallery">
+                                    @foreach (ApplicationUser entity in ViewBag.Users)
+                                    {
+                                        <li>
+                                            @if (SignInManager.IsSignedIn(User))
+                                            {
+                                                <a asp-area="" asp-controller="Friends" asp-action="Friends" asp-route-id="@entity.Id">
+                                                    <i class="fas fa-plus"></i>
+                                                    <img src="~/images/@entity.UserImagePath" alt="" />
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <p>@entity.FirstName</p>
+                                                    </div>
+                                                </a>
+
+                                            }
+                                            else
+                                            {
+                                                <a href="#">
+                                                    <i class="fas fa-plus"></i>
+                                                    <img src="~/images/@entity.UserImagePath" alt="" />
+                                                    <div class="carousel-caption d-none d-md-block">
+                                                        <p>@entity.FirstName</p>
+                                                    </div>
+                                                </a>
+                                            }
+
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="nav-link font-weight-bold text-black-50" asp-area="" asp-controller="Services" asp-action="ReturnEvents"><i class="fas fa-arrow-left"></i>Назад к мероприятиям</a>
+    </section>
+
+</div>

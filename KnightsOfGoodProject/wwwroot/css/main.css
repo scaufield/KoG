@@ -2014,10 +2014,9 @@ header {
                 color: #3C4AED;
             }
 
-        .team_item .tema_content p {
-            
+        .team_item .tema_content span {
             font-size: 16px;
-            font-weight: 400;
+            font-weight: 500;
             color: #3C4AED;
             padding-top: 0.75rem;
         }
@@ -3412,7 +3411,7 @@ a {
 
 .section-header {
     display: inline-block;
-    color: #3C4AED;
+    color: #121f9f;
     font-size: 25px;
     -webkit-font-smoothing: antialiased;
     line-height: 1;
@@ -3765,8 +3764,8 @@ section .breadcrumb_area .parallax_effect {
 
 
 
-.breadcrumb_area  {
-    background-image: url(../images/BBpLf7MJ5Nk.jpg);
+.breadcrumb_area {
+    background-image: url(../images/764d9jpLlto.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -4054,8 +4053,8 @@ section .breadcrumb_area .parallax_effect {
     height: 400px;
 }
 .event-image {
-    width: 570px;
-    height: 400px;
+    width: 768px;
+    height: 450px;
     object-fit: cover;
 }
 
@@ -4071,10 +4070,18 @@ section .breadcrumb_area .parallax_effect {
 
 .h_post_info .item:nth-child(1) {
     color: black;
-    width: 30%;
+    width: 40%;
     display: inline;
     border-right: 1px solid #bababa;
 }
+
+.h_post_info .item:last-child {
+    color: black;
+    width: 31%;
+    margin-left: 55px;
+    display: inline;
+}
+
 .blog_d_img img {
     width: 770px;
     height: 370px;
@@ -4180,14 +4187,14 @@ card-img-profile {
     /*background: #f9f9f9;*/
 }
 
-input[type="datetime"] {
+input[type="date"] {
     margin: 0;
-    padding: 9px 18px;
+    padding: 9px 65px;
     border: 1px solid #eeeeee;
     width: 100%;
     outline: none;
     color: #999999;
-    font-size: 14px;
+    font-size: 17px;
     font-family: "Poppins", sans-serif;
     font-weight: 400;
     background: #fff;
@@ -4307,6 +4314,15 @@ input[type="date"] {
     .my-button.maiden-3 {
         background-color: #3C4AED;
         color:#fff;
+    }
+
+    .my-button.my-profile {
+        background-color: #3C4AED;
+        color: #fff;
+        margin: 4px;
+        width: 284px;
+        font-size: 18px;
+        padding-bottom: 11px;
     }
 
     .my-button.maiden-9 {
