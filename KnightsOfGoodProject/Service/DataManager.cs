@@ -11,12 +11,14 @@ namespace KnightsOfGoodProject.Service
         public IServiceItemsRepository ServiceItemsRepository { get; set; }
         public IUserService UserService { get; set; }
         public ITextFieldsRepository TextFields { get; set; }
+        public IFriendsRepository FriendsRepository { get; set; }
 
         public DataManager(IHomeRepository homeRepository,
           IAccountRepository accountRepository,
           IServiceItemsRepository serviceItemsRepository, 
           ITextFieldsRepository textFieldsRepository,
-          IUserService userService
+          IUserService userService,
+          IFriendsRepository friendsRepository
           )
         {
             HomeRepository = homeRepository;
@@ -24,6 +26,7 @@ namespace KnightsOfGoodProject.Service
             ServiceItemsRepository = serviceItemsRepository;
             UserService = userService;
             TextFields = textFieldsRepository;
+            FriendsRepository = friendsRepository;
         }
     }
 }

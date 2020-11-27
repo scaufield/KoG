@@ -12,6 +12,8 @@ namespace KnightsOfGoodProject.Models
         public ApplicationUser()
         {           
 		    UserEvents = new List<EventsAndUserModel>();
+            UserFriends = new List<Friends>();
+            WhoAddMe = new List<Friends>();
         }
     
         public string FirstName { get; set; }
@@ -22,6 +24,8 @@ namespace KnightsOfGoodProject.Models
         public string Bio { get; set; }
         public virtual string UserImagePath { get; set; }
         public List<EventsAndUserModel> UserEvents { get; set; }
-   
+        public List<Friends> UserFriends { get; set; }
+        public List<Friends> WhoAddMe { get; set; }
+        
     }
 }

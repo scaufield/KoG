@@ -17,8 +17,7 @@ namespace KnightsOfGoodProject.Data
          public DbSet<ServiceItem> ServiceItems { get; set; }
          public DbSet<ApplicationUser> ApplicationUser { get; set; }
          public DbSet<EventsAndUserModel> EventsAndUser { get; set; }
-
-      
+         public DbSet<Friends> Friends { get; set; }
         //Заполняем БД значениями по умолчанию
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -85,7 +84,19 @@ namespace KnightsOfGoodProject.Data
                 .HasOne(sc => sc.Event)
                 .WithMany(s => s.Users)
                 .HasForeignKey(sc => sc.EventId);
+            modelBuilder.Entity<Friends>()
+               .HasKey(t => new { t.UserId, t.FriendId });
 
+            modelBuilder.Entity<Friends>()
+                .HasOne(sc => sc.User)
+                .WithMany(c => c.UserFriends)
+                .HasForeignKey(sc => sc.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Friends>()
+                .HasOne(sc => sc.Friend)
+                .WithMany(s => s.WhoAddMe)
+                .HasForeignKey(sc => sc.FriendId);
 
         }
     }
