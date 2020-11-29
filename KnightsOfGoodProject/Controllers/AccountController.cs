@@ -69,7 +69,63 @@ namespace KnightsOfGoodProject.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+    [Route("edit-user")]
+        public IActionResult EditUser()
+        {
+            return View();
+        }
 
-      
+        [HttpPost("edit-user")]
+        public async Task<IActionResult> EditUser(EditUserPageModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _accountRepository.EditUserAsync(model);
+                if (result.Succeeded)
+                {
+                    ViewBag.IsSuccess = true;
+                    ModelState.Clear();
+                    return RedirectToAction("Im", "Home");
+
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+            }
+            return View(model);
+        }
+
+        [Route("change-password")]
+        public IActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        [HttpPost("change-password")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _accountRepository.ChangePasswordAsync(model);
+                if (result.Succeeded)
+                {
+                    ViewBag.IsSuccess = true;
+                    ModelState.Clear();
+                    return RedirectToAction("Im", "Home");
+
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+            }
+            return View(model);
+        }
+        
     }
 }
