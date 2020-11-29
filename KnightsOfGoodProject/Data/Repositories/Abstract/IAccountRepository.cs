@@ -14,5 +14,9 @@ namespace KnightsOfGoodProject.Data.Repositories.Abstract
 
         Task SignOutAsync();
 
+        Task<IdentityResult> EditUserAsync(EditUserPageModel model);
+
+        Task<IdentityResult> ChangePasswordAsync(ChangePasswordModel model);
+
     }
 }

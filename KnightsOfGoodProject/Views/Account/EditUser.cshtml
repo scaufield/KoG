@@ -1,0 +1,55 @@
+@model KnightsOfGoodProject.Models.EditUserPageModel
+
+
+@{
+    ViewData["Title"] = "Редактировать профиль";    
+}
+<div class="container">
+
+    <div class="service_faq_inner">
+        <div class="nav nav-tabs service_tab" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" asp-area="" asp-controller="Account" asp-action="EditUser" id="nav-home-tab" 
+               aria-controls="nav-home" aria-selected="true">Редактировать профиль</a>
+            <a class="nav-item nav-link" asp-area="" asp-controller="Account" asp-action="ChangePassword" id="nav-home-tab" 
+               aria-controls="nav-home" aria-selected="true">Изменить пароль</a>
+        </div>
+        <div class="tab-content service_tab_content" id="nav-tabContent">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="EditUser">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="FirstName" class="control-label"></label>
+                            <input asp-for="FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="LastName" class="control-label"></label>
+                            <input asp-for="LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="DateOfBirth" class="control-label"></label>
+                            <input asp-for="DateOfBirth" type="datetime-local" class="form-control" />
+                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Bio" class="control-label"></label>
+                            <input asp-for="Bio" class="form-control" />
+                            <span asp-validation-for="Bio" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="TitleImagePath" class="control-label"></label>
+                            <input type="file" asp-for="TitleImagePath" />
+                            <span asp-validation-for="TitleImagePath" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="my-button maiden-3" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
