@@ -64,7 +64,10 @@ namespace KnightsOfGoodProject.Data.Repositories
             return await _userManager.ChangePasswordAsync(user, model.CurrentPassword, model.NewPassword);
         }
 
-
+        public async Task SignOutAsync()
+        {
+            await _signInManager.SignOutAsync();
+        }
     }
 }
 

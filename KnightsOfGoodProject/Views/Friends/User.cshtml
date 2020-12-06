@@ -2,9 +2,10 @@
 @{ ViewData["Title"] = @Model.FirstName + " " + @Model.LastName;
     var IsFriend = ViewBag.IsFriend;
 }
-<section class="sec_pad">
+<section >
     <div class="container">
-        <a class="img img_friend" asp-area="" asp-controller="Friends" asp-action="All" asp-route-id="@Model.Id"><i class="fas fa-long-arrow-alt-left"></i>Назад к друзьям</a>
+        <a class="nav-link hover-effect2 mt-1 mb-1 ml-0" asp-area=""  asp-controller="Friends" asp-action="All" asp-route-id="@Model.Id"><i class="fas fa-arrow-left"></i></a>
+
         <div class="main-body">
 
             <div class="row gutters-sm">
@@ -93,7 +94,7 @@
                                     <h6 class="mb-0">BDay</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    @Model.DateOfBirth
+                                    @Html.DisplayFor(modelItem => Model.DateOfBirth)
                                 </div>
                             </div>
                         </div>
