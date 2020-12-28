@@ -23,14 +23,14 @@
                                         @if (@IsFriend == false)
                                         {
                                             <form method="post">
-                                                <input type="submit" value="Добавить в друзья" class="my-button maiden-3" />
+                                                <input type="submit" value="Добавить в друзья" class="btn btn-primary btn-pill" />
                                             </form>
 
                                             @*<a class="stylistics_knopkam maiden-3" asp-area="" asp-controller="Friends" asp-action="GetFriendPost">В Друзья</a>*@
                                         }
                                         else
                                         {
-                                            <button class="my-button  maiden-3 dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">В друзьях</button>
+                                            <button class="btn btn-primary btn-pill dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">В друзьях</button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item" asp-area="" asp-controller="Friends" asp-action="DeleteFriend">Удалить из друзей</a>
                                             </div>

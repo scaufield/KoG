@@ -1,146 +1,138 @@
 ﻿@model IQueryable<ServiceItem>
-    @{
+@{
     TextField textField = ViewBag.TextField;
     ViewData["Title"] = "Мероприятия";
     //ViewBag.Description = textField.MetaDescription;
     //ViewBag.Keywords = textField.MetaKeywords;
 
-    }
+}
 
-    <div class="body_wrapper">
-        <div id="preloader">
-            <div id="ctn-preloader" class="ctn-preloader">
-                <img src="../wwwroot/images/events/assets/img/loader.gif" alt="" />
+<div class="body_wrapper">
+    <div id="preloader">
+        <div id="ctn-preloader" class="ctn-preloader">
+            <img src="../wwwroot/images/events/assets/img/loader.gif" alt="" />
+        </div>
+    </div>
+
+    <section class="breadcrumb_area parallax_effect">
+        <div class="overlay_bg"></div>
+        <div class="container">
+            <div class="bread_content">
+                <h2>Мероприятия</h2>
             </div>
         </div>
+    </section>
 
+    <section class="blog_area sec_pad">
+        <div class="container">
 
-        <!--breadcrumb_area-->
-        <section class="breadcrumb_area parallax_effect">
-            <div class="overlay_bg"></div>
-            <div class="container">
-                <div class="bread_content">
-                    <h2>Мероприятия</h2>
-                </div>
-            </div>
-        </section>
-        <!--breadcrumb_area-->
-        <!--blog area-->
-        <section class="blog_area sec_pad">
-            <div class="container">
-
-                <div class="row">
-
-                    <p>Поиск мероприятий по датам:</p>
-                    <form method="post">
-                        <div class="search-widget widget">
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4">
-                                    <input type="date" name="startdate"  id="DateOfBirth" placeholder="Начальная дата" />
-                                </div>
-                                <div class="col-lg-4 col-md-4">
-                                    <input type="date" name="enddate"  id="DateOfBirth" placeholder=" Конечная дата" />
-                                    <button type="submit">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </div>
-                                <a class="my-button maiden-3 col-lg-3 col-md-3" asp-area="" asp-controller="Services" asp-action="Events">Показать все</a>
+            <div class="row">
+                <p>Поиск мероприятий по датам:</p>
+                <form method="post">
+                    <div class="search-widget widget">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4">
+                                <input type="date" name="startdate" id="DateOfBirth" placeholder="Начальная дата" />
                             </div>
-
+                            <div class="col-lg-4 col-md-4">
+                                <input type="date" name="enddate" id="DateOfBirth" placeholder=" Конечная дата" />
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                            <a class="btn btn-primary btn-pill btn-1 col-lg-3 col-md-3" asp-area="" asp-controller="Services" asp-action="Events">Показать все</a>
                         </div>
+                    </div>
 
 
-                        <div class="col-lg-12 blog_info mt-3">
+                    <div class="col-lg-12 blog_info mt-3">
+                        @if (Model.Any())
+                        {
+                            DateTime NowTime = DateTime.Now;
                             <div>
                                 <span class="section-header font-weight-bold mt-4">
                                     Актуальные мероприятия
                                 </span>
 
                             </div>
-
-
                             <div class="row">
 
-
-                                @if (Model.Any())
-                    {
-                        DateTime NowTime = DateTime.Now;
                                 @foreach (ServiceItem entity in Model)
-                        {
+                                {
 
-                                @if (@entity.DateTime > NowTime)
-                            {
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="card mb-5">
-                                        <a asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity.Id">
-                                            <img class="card-img-top" src="~/images/@entity.TitleImagePath" alt="Card image cap">
-                                        </a>
-                                        <div class="card-body  card-event-pd">
-                                            <p class="post-meta">@Html.DisplayFor(modelItem => entity.DateTime)</p>
-                                            <h4 class="card-title">@entity.Title</h4>
+                                    @if (@entity.DateTime > NowTime)
+                                    {
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="card mb-5">
+                                                <a asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity.Id">
+                                                    <img class="card-img-top" src="~/images/@entity.TitleImagePath" alt="Card image cap">
+                                                </a>
+                                                <div class="card-body  card-event-pd">
+                                                    <p class="post-meta">@Html.DisplayFor(modelItem => entity.DateTime)</p>
+                                                    <h4 class="card-title">@entity.Title</h4>
 
-                                            <p class="card-text">
-                                                @entity.Subtitle
-                                            </p>
-                                            <a asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity.Id" class="card-link">К мероприятию</a>
+                                                    <p class="card-text">
+                                                        @entity.Subtitle
+                                                    </p>
+                                                    <a asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity.Id" class="card-link">К мероприятию</a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-
-
-                            }
-                        }
-                    }
+                                    }
+                                }
                             </div>
+                        }
 
 
+                        @if (Model.Any())
+                        {
+                            DateTime NowTime2 = DateTime.Now;
                             <div>
                                 <span class="section-header font-weight-bold mt-4">
                                     Прошедшие мероприятия
                                 </span>
-
                             </div>
-
                             <div class="row">
-                                @if (Model.Any())
-                    {
-
-                        DateTime NowTime2 = DateTime.Now;
                                 @foreach (ServiceItem entity2 in Model)
-                        {
+                                {
 
-                                @if (@entity2.DateTime < NowTime2)
-                            {
+                                    @if (@entity2.DateTime < NowTime2)
+                                    {
 
-                                <div class="col-lg-6 col-md-6">
-                                    <div class="card mb-5">
-                                        <a asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity2.Id">
-                                            <img class="card-img-top" src="~/images/@entity2.TitleImagePath" alt="Card image cap">
-                                        </a>
-                                        <div class="card-body  card-event-pd">
-                                            <h4 class="card-title">@entity2.Title</h4>
-                                            <p class="post-meta">@Html.DisplayFor(modelItem => entity2.DateTime)</p>
-                                            <p class="card-text">
-                                                @entity2.Subtitle
-                                            </p>
-                                            <a asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity2.Id">К мероприятию</a>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="card mb-5">
+                                                <a asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity2.Id">
+                                                    <img class="card-img-top" src="~/images/@entity2.TitleImagePath" alt="Card image cap">
+                                                </a>
+                                                <div class="card-body  card-event-pd">
+                                                    <h4 class="card-title">@entity2.Title</h4>
+                                                    <p class="post-meta">@Html.DisplayFor(modelItem => entity2.DateTime)</p>
+                                                    <p class="card-text">
+                                                        @entity2.Subtitle
+                                                    </p>
+                                                    <a asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity2.Id">К мероприятию</a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            }
-                        }
-                    }
-
-                                <div class="col-lg-12 text-center">
-                                    <a href="#" class="theme_w_btn theme_b_btn border_btn">На этом всё, в начало!</a>
-                                </div>
+                                    }
+                                }
                             </div>
+                        }
+
+                        @if (Model.Any() == false)
+                        {
+                            <h1>
+                                Мероприятй не найдено
+                            </h1>
+                        }
+
+                        <div class="col-lg-12 text-center">
+                            <a href="#" class="theme_w_btn theme_b_btn border_btn">На этом всё, в начало!</a>
                         </div>
-                    </form>
 
-                </div>
+                    </div>
+</form>
             </div>
-        </section>
-        <!--blog area-->
-
-    </div>
+        </div>
+    </section>
+</div>
