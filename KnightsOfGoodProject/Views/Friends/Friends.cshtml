@@ -17,9 +17,10 @@
         <div class="row">
             @if (Model.Any())
             {
+                int count = 0;
                 @foreach (ApplicationUser entity in Model)
                 {
-
+                    count++;
                     <div class="col-lg-3 col-sm-6">
                         <div class="team_item wow fadeInUp" data-wow-delay="0.2s">
                             <a asp-area="" asp-controller="Friends" asp-action="Friends" asp-route-id="@entity.Id">
@@ -27,16 +28,29 @@
                             </a>
                             <div class="tema_content">
                                 <a href="#"><h6>@entity.FirstName @entity.LastName</h6></a>
-                                <span>Волонтёр</span>
+                                @if (@entity.UserName == "admin")
+                                {
+                                    <span class="font-weight-bold text-info">Админ</span>
+                                }
+                                else
+                                {
+                                    <span class="font-weight-bold">Волонтёр</span>
+                                }
                             </div>
 
                         </div>
                     </div>
-
                 }
-
+                @if (count == 0)
+                {
+                    <div>
+                        <p>
+                            У вас пока нет друзей, добавьте их!
+                        </p>
+                        <img src="/images/4k4S0D7yoi0.jpg" alt="sing up image">
+                    </div>
+                }
             }
-
         </div>
     </div>
 </section>

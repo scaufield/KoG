@@ -1,6 +1,8 @@
 @model ApplicationUser
 @{ ViewData["Title"] = @Model.FirstName + " " + @Model.LastName;
     var IsFriend = ViewBag.IsFriend;
+    int count = 0;
+    int count2 = 0;
 }
 <section >
     <div class="container">
@@ -16,8 +18,14 @@
                                 <img src="~/images/@Model.UserImagePath" class="rounded-circle" width="200">
                                 <div class="mt-3">
                                     <h3>@Model.FirstName @Model.LastName</h3>
-                                    <p class="text-secondary mb-1">Волонтёр</p>
-
+                                    @if (@Model.UserName == "admin")
+                                    {
+                                        <p class="admin admin-danger mb-1 mx-auto">Админ</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-secondary mb-1">Волонтёр</p>
+                                    }
                                     <div class="dropdown">
 
                                         @if (@IsFriend == false)
@@ -121,13 +129,20 @@
 
                             @foreach (ServiceItem entity2 in ViewBag.Event)
                             {
+
                                 DateTime NowTime = DateTime.Now;
 
                                 @if (@entity2.DateTime > NowTime)
                                 {
                                     <li><a class="list-inline-item" asp-controller="Services" asp-action="Events" asp-route-id="@entity2.Id">@entity2.Title</a> </li>
-
+                                    count2++;
                                 }
+                            }
+                            @if (count2 == 0)
+                            {
+                                <h6 class="text-black-50 font-weight-light mx-auto">
+                                    Пользователь не участвует в предстоящих мероприятиях!
+                                </h6>
                             }
 
                         </ul>
@@ -144,9 +159,7 @@
                                             <div class="row ">
                                                 @foreach (ServiceItem entity in ViewBag.Event)
                                                 {
-
                                                     <div class="col-sm-4">
-
                                                         <div class="img-box">
                                                             <a class="img-box-a" asp-area="" asp-controller="Services" asp-action="Events" asp-route-id="@entity.Id">
                                                                 <img class="img-responsive" src="~/images/@entity.TitleImagePath" />
@@ -154,9 +167,14 @@
                                                         </div>
 
                                                     </div>
-
+                                                    count++;
                                                 }
-
+                                                @if (count == 0)
+                                                {
+                                                    <h6 class="text-black-50 font-weight-light mx-auto">
+                                                      Пользователь еще не участвовал в мероприятиях!
+                                                    </h6>
+                                                    <img class="w-75 h-75" src="/images/ClessLfj4ww.jpg">}
                                             </div>
                                         </div>
                                     </div>

@@ -7,39 +7,55 @@
     <div class="container">
 
         <div class="p_filter_info d-flex justify-content-center">
-          
+
             <div id="portfolio_filter" class="portfolio_filter">
                 <a class="work_portfolio_item active" asp-controller="Friends" asp-action="All">Друзья</a>
                 <a class="work_portfolio_item " asp-controller="Friends" asp-action="Friends">Все</a>
 
             </div>
         </div>
-     
-       
+
+
         <div class="row">
+
             @if (Model.Any())
             {
+
                 @foreach (ApplicationUser entity in Model)
                 {
 
                     <div class="col-lg-3 col-sm-6">
-                        <div class="team_item wow fadeInUp " data-wow-delay="0.2s">
-                            <a class="img img_friend" asp-area="" asp-controller="Friends" asp-action="Friends" asp-route-id="@entity.Id">
-                                <img  class="img img_friend"  src="~/images/@entity.UserImagePath" />
+                        <div class="team_item wow fadeInUp" data-wow-delay="0.2s">
+                            <a asp-area="" asp-controller="Friends" asp-action="Friends" asp-route-id="@entity.Id">
+                                <img class="img img_friend" src="~/images/@entity.UserImagePath" />
                             </a>
                             <div class="tema_content">
                                 <a href="#"><h6>@entity.FirstName @entity.LastName</h6></a>
-                                <span>Волонтёр</span>
+                                @if (@entity.UserName == "admin")
+                                {
+                                    <span class="font-weight-bold text-info">Админ</span>
+                                }
+                                else
+                                {
+                                    <span class="font-weight-bold">Волонтёр</span>
+                                }
+
                             </div>
-                           
 
                         </div>
                     </div>
-
                 }
-
             }
-
+            @if (Model.Any() == false)
+            {
+               
+                    <div class="col-8 mx-auto text-center">
+                    <h3 class="text-black-50 font-weight-light">
+                        У вас пока нет друзей, добавьте их!   
+                    </h3>
+                    <img class="w-50 р-50" src="/images/-g8-e--dar0.jpg" alt="sing up image">
+                    </div>
+             
+            }
         </div>
-    </div>
 </section>

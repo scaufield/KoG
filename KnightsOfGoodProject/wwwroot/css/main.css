@@ -1997,7 +1997,7 @@ header {
         font-weight: 600;
         opacity: .8;
         line-height: 1.45;
-        text-align: left;
+        text-align: center;
     }
 
 
@@ -3759,13 +3759,13 @@ body > .container {
 }
 
 section .breadcrumb_area .parallax_effect {
-    background-image: url(../images/BBpLf7MJ5Nk.jpg);
+    background-image: url(../images/rY49ueIxhPg2.jpg);
 }
 
 
 
 .breadcrumb_area {
-    background-image: url(../images/764d9jpLlto.jpg);
+    background-image: url(../images/rY49ueIxhPg2.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -4063,7 +4063,7 @@ section .breadcrumb_area .parallax_effect {
     width: 280px;
     height: 280px;
     object-fit: cover;
-    border-radius: 20px;
+    border-radius: 50%;
 }
 
 
@@ -4110,6 +4110,7 @@ body {
     border: 0px;
     border-radius: 0px;
     background: #fff;
+    height:80px;
 }
 
 .menu > .nav-item {
@@ -4147,7 +4148,7 @@ body {
 
 header + div,
 header + section {
-    margin-top: 100px;
+    margin-top: 70px;
 }
 
 /*Новые стили*/
@@ -4177,10 +4178,6 @@ card-img-profile {
     object-fit: cover;
     border-radius: 50%;
 }
-
-
-
-
 
 .sec_pad {
     padding: 30px 0px;
@@ -4389,7 +4386,7 @@ a {
         -webkit-transition: all 0.5s ease;
         -moz-transition: all 0.5s ease;
         transition: all 0.5s ease;
-        background: #8080806b;
+        background:#8080802b;
         color: white;
     }
 
@@ -5180,7 +5177,24 @@ a {
 
 
 
+.admin-danger {
+    color: #fff;
+    background-color: #dc3545;
+}
 
+.admin {
+    display: block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 6.25rem;
+    width: 60px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
 
 
 
